@@ -1,6 +1,6 @@
 public enum Priority {
     RED,
-    GREEN,
     YELLOW,
+    GREEN,
     BLACK
 }
