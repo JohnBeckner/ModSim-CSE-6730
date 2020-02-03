@@ -10,4 +10,9 @@ public class PatientAssessedEvent extends Event {
     public void execute() {
 
     }
+
+    public Patient setPatient(Patient patient) {
+        this.patient = patient;
+        return this.patient;
+    }
 }
