@@ -1,4 +1,6 @@
-public class Doctor implements MedicalProfessional {
+package people;
+
+public class Nurse implements MedicalProfessional {
 
     @Override
     public int examine(Patient patient) {

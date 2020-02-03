@@ -1,7 +1,12 @@
+import events.Event;
+
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
+
+import people.*;
+import types.*;
 
 public class Main {
 
@@ -9,6 +14,7 @@ public class Main {
     public static PriorityQueue<Patient> waitingRoom;
     public static ArrayList<Room> rooms;
     public static ArrayList<Room> emptyRooms;
+    private static LinkedBlockingQueue<Event> fel;
 
     final static int NUMBER_OF_TREATMENT_ROOMS = 10;
     final static int NUMBER_OF_XRAY_ROOMS = 2;
@@ -28,6 +34,7 @@ public class Main {
         waitingRoom = new PriorityQueue<>(priority);
         rooms = new ArrayList<Room>();
         emptyRooms = new ArrayList<Room>();
+        fel = new LinkedBlockingQueue<>();
 
         for (int i = 0; i < NUMBER_OF_TREATMENT_ROOMS; i++) {
             emptyRooms.add(new Room(RoomType.TREATMENT));
@@ -39,6 +46,13 @@ public class Main {
 
         for (int i = 0; i < NUMBER_OF_LABS; i++) {
             emptyRooms.add(new Room(RoomType.LAB_TEST));
+        }
+
+        //Populate initial events somehow
+        while (!fel.isEmpty()) {
+            Event event = fel.remove();
+            event.execute();
+            movePatientsForward();
         }
     }
 

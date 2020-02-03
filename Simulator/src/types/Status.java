@@ -1,3 +1,5 @@
+package types;
+
 public enum Status {
     WAITING,
     ASSESSED,

@@ -1,5 +1,8 @@
 import java.util.LinkedList;
 
+import types.*;
+import people.*;
+
 public class Room {
     private boolean isFull;
     private int capacity;
