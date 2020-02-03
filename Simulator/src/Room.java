@@ -70,6 +70,10 @@ public class Room {
     //Returns true if successful
     public boolean addPatient(Patient patient) {
         if (!isFull) {
+            if (this.patients.isEmpty()) {
+                Main.rooms.add(this);
+                Main.emptyRooms.remove(this);
+            }
             this.patients.add(patient);
             updateIsFull();
             return true;
@@ -81,6 +85,10 @@ public class Room {
     public boolean removePatient(Patient patient) {
         if (!this.patients.isEmpty()) {
             if (this.patients.remove(patient)) {
+                if (this.patients.isEmpty()) {
+                    Main.rooms.remove(this);
+                    Main.emptyRooms.add(this);
+                }
                 updateIsFull();
                 return true;
             }

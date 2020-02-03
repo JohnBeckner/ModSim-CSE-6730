@@ -1,6 +1,9 @@
 public enum Status {
     WAITING,
     ASSESSED,
-    BEING_SEEN,
+    NURSE_EVAL,
+    NURSE_LAB,
+    DOCTOR_EVAL,
+    DOCTOR_LAB,
     TREATED
 }
