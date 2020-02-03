@@ -35,7 +35,9 @@ public class Room {
     //Call this to update the isFull boolean
     private void updateIsFull() {
         if (this.patients.size() >= capacity) {
-            isFull = true;
+            this.isFull = true;
+        } else {
+            this.isFull = false;
         }
     }
 
@@ -78,7 +80,10 @@ public class Room {
 
     public boolean removePatient(Patient patient) {
         if (!this.patients.isEmpty()) {
-            return this.patients.remove(patient);
+            if (this.patients.remove(patient)) {
+                updateIsFull();
+                return true;
+            }
         }
 
         return false;
