@@ -2,10 +2,12 @@ package people;
 
 import types.Priority;
 import types.Status;
+import room.Bed;
 
 public class Patient {
     public Priority priority;
     public Status status;
+    public Bed bed;
 
     public double waitTime;
 

@@ -2,6 +2,7 @@ package events;
 
 import people.Patient;
 import people.Doctor;
+import types.Status;
 
 public class DoctorExamEvent extends Event {
 
@@ -10,7 +11,9 @@ public class DoctorExamEvent extends Event {
 
     @Override
     public void execute() {
-        
+        patient.status = Status.DOCTOR_EVAL;
+        patient.bed.setMedicalProfessional(doctor);
+        System.out.println("Patient evaluated by nurse");
     }
 
     public Patient setPatient(Patient patient) {

@@ -1,3 +1,5 @@
+package types;
+
 import java.util.Random;
 
 public class Range {
@@ -8,6 +10,7 @@ public class Range {
     public Range(int lower, int upper) {
         this.lower = lower;
         this.upper = upper;
+        this.random = new Random();
     }
 
     public int generateRandomInRange() {

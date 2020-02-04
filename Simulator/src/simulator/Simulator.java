@@ -1,4 +1,7 @@
+package simulator;
+
 import events.Event;
+import events.DoctorExamEvent;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.PriorityQueue;
@@ -7,17 +10,22 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import events.PatientAssessedEvent;
 import people.*;
-import types.Status;
-import types.Priority;
+import types.*;
+import room.Bed;
 
-public class Main {
+
+
+
+public class Simulator {
 
     public static PriorityQueue<Patient> waitingRoom;
     public static ArrayList<Bed> beds;
     private static LinkedBlockingQueue<Event> fel;
 
     public static int bedsFull = 0;
+    public static int time = 0;
 
     final static int NUMBER_OF_BEDS = 10;
     final static Range NURSE_RANGE = new Range(20, 40);
@@ -46,21 +54,25 @@ public class Main {
             beds.add(new Bed());
         }
 
-        //Populate initial events somehow
-        while (!fel.isEmpty()) {
-            Event event = fel.remove();
-            event.execute();
-            movePatientsForward();
-        }
-
-        System.out.println("Press enter to generate a new patient");
-        String generatePatient = sc.nextLine();
-
         // generate new patient
         // make sure to print patient information
         Patient newPatient = new Patient(priorityValues[randomPriority.nextInt(prioritySize)]);
         waitingRoom.add(newPatient);
         System.out.println("Patient Added with priority: " + newPatient.getPriority().toString());
+
+        System.out.println("Press enter to generate a new patient");
+        String generatePatient = sc.nextLine();
+
+        //Populate initial events somehow
+        while (!fel.isEmpty() || !waitingRoom.isEmpty() || time < 250) {
+            System.out.println("Loop");
+            if (!fel.isEmpty()) {
+                Event event = fel.remove();
+                event.execute();
+            }
+            movePatientsForward();
+            Simulator.time += 1;
+        }
     }
 
     /*
@@ -72,14 +84,15 @@ public class Main {
         //2) Are patients undergoing tests ready to be re-examined?
         //3) Are patients who are waiting for lab results ready to be re-examined?
 
-        if (Main.bedsFull < NUMBER_OF_BEDS) {
+        if (Simulator.bedsFull < NUMBER_OF_BEDS) {
             Patient patient = waitingRoom.remove();
-            for (Bed bed: beds) {
-                if (!bed.isFull()) {
-                    bed.addPatient(patient);
-                    bed.setMedicalProfessional(new Nurse());
-                }
-            }
+            PatientAssessedEvent event = new PatientAssessedEvent();
+            event.setPatient(patient);
+            event.setNurse(new Nurse());
+            fel.add(event);
+            //PatientAssessedEvent
+
+
         }
 
         for (Bed bed: beds) {
@@ -100,19 +113,21 @@ public class Main {
                 if (patient.waitTime >= rangeVal) {
                     switch(patient.status) {
                         case NURSE_EVAL:
-                            patient.status = Status.DOCTOR_EVAL;
-                            bed.setMedicalProfessional(new Doctor());
-                            System.out.println("Patient evaluated by nurse");
+                            DoctorExamEvent event = new DoctorExamEvent();
+                            event.setDoctor(new Doctor());
+                            event.setPatient(patient);
+                            fel.add(event);
                             break;
                         case DOCTOR_EVAL:
-                            patient.status = Status.TREATED;
-                            bed.setMedicalProfessional(null);
-                            System.out.println("Patient evaluated by doctor");
+                            //patient.status = Status.TREATED;
+                            //bed.setMedicalProfessional(null);
+                            bed.removePatient();
+                            System.out.println("Patient evaluated by doctor. Leaving emergency room. " + bed);
                             break;
-                        case TREATED:
+                        /*case TREATED:
                             bed.removePatient();
                             System.out.println("Patient has been treated");
-                            break;
+                            break;*/
                         default:
                             System.out.println("Status is incorrect: " + patient.status.toString());
                     }

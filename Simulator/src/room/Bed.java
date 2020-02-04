@@ -1,15 +1,15 @@
-import java.util.LinkedList;
+package room;
 
-import types.*;
 import people.*;
+import simulator.Simulator;
 
 public class Bed {
-    private boolean isFull;
+    public boolean isFull;
     private Patient patient;
     private MedicalProfessional medicalProfessional;
 
     public Bed(Patient patient) {
-        this.isFull = true;
+        this.isFull = false;
         this.patient = patient;
     }
 
@@ -43,7 +43,7 @@ public class Bed {
 
         this.patient = patient;
         this.isFull = true;
-        Main.bedsFull += 1;
+        Simulator.bedsFull += 1;
         return true;
     }
 
@@ -52,7 +52,7 @@ public class Bed {
         if (this.isFull) {
             this.patient = null;
             this.isFull = false;
-            Main.bedsFull -= 1;
+            Simulator.bedsFull -= 1;
             return true;
         }
 
