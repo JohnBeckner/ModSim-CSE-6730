@@ -15,9 +15,6 @@ import people.*;
 import types.*;
 import room.Bed;
 
-
-
-
 public class Simulator {
 
     public static PriorityQueue<Patient> waitingRoom;
@@ -27,7 +24,7 @@ public class Simulator {
     public static int bedsFull = 0;
     public static int time = 0;
 
-    final static int NUMBER_OF_BEDS = 10;
+    final static int NUMBER_OF_BEDS = 1;
     final static Range NURSE_RANGE = new Range(20, 40);
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
@@ -64,8 +61,9 @@ public class Simulator {
         String generatePatient = sc.nextLine();
 
         //Populate initial events somehow
+        System.out.println("Assume time in minutes:");
         while (!fel.isEmpty() || !waitingRoom.isEmpty() || time < 250) {
-            System.out.println("Loop");
+            System.out.println(Simulator.time);
             if (!fel.isEmpty()) {
                 Event event = fel.remove();
                 event.execute();
@@ -84,7 +82,7 @@ public class Simulator {
         //2) Are patients undergoing tests ready to be re-examined?
         //3) Are patients who are waiting for lab results ready to be re-examined?
 
-        if (Simulator.bedsFull < NUMBER_OF_BEDS) {
+        if (Simulator.bedsFull < NUMBER_OF_BEDS && !waitingRoom.isEmpty()) {
             Patient patient = waitingRoom.remove();
             PatientAssessedEvent event = new PatientAssessedEvent();
             event.setPatient(patient);
