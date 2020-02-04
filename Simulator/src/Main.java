@@ -6,19 +6,16 @@ import java.util.Comparator;
 import java.util.ArrayList;
 
 import people.*;
-import types.*;
 
 public class Main {
 
     public static LinkedBlockingQueue<Patient> triage;
     public static PriorityQueue<Patient> waitingRoom;
-    public static ArrayList<Room> rooms;
-    public static ArrayList<Room> emptyRooms;
+    public static ArrayList<Bed> beds;
+    public static ArrayList<Bed> emptyBeds;
     private static LinkedBlockingQueue<Event> fel;
 
-    final static int NUMBER_OF_TREATMENT_ROOMS = 10;
-    final static int NUMBER_OF_XRAY_ROOMS = 2;
-    final static int NUMBER_OF_LABS = 3;
+    final static int NUMBER_OF_BEDS = 10;
 
     static Comparator<Patient> priority = new Comparator<Patient>() {
         @Override
@@ -32,20 +29,12 @@ public class Main {
 
         triage = new LinkedBlockingQueue<>();
         waitingRoom = new PriorityQueue<>(priority);
-        rooms = new ArrayList<Room>();
-        emptyRooms = new ArrayList<Room>();
+        beds = new ArrayList<Bed>();
+        emptyBeds = new ArrayList<Bed>();
         fel = new LinkedBlockingQueue<>();
 
-        for (int i = 0; i < NUMBER_OF_TREATMENT_ROOMS; i++) {
-            emptyRooms.add(new Room(RoomType.TREATMENT));
-        }
-
-        for (int i = 0; i < NUMBER_OF_XRAY_ROOMS; i++) {
-            emptyRooms.add(new Room(RoomType.XRAY));
-        }
-
-        for (int i = 0; i < NUMBER_OF_LABS; i++) {
-            emptyRooms.add(new Room(RoomType.LAB_TEST));
+        for (int i = 0; i < NUMBER_OF_BEDS; i++) {
+            emptyBeds.add(new Bed());
         }
 
         //Populate initial events somehow
@@ -64,18 +53,5 @@ public class Main {
         //1) Are patients being examined ready to leave?
         //2) Are patients undergoing tests ready to be re-examined?
         //3) Are patients who are waiting for lab results ready to be re-examined?
-
-        for (Room room: rooms) {
-            switch (room.getRoomType()) {
-                case TREATMENT:
-                    break;
-                case LAB_TEST:
-                    break;
-                case XRAY:
-                    break;
-                default:
-                    throw new EnumConstantNotPresentException(RoomType.class, room.getRoomType().toString());
-            }
-        }
     }
 }
