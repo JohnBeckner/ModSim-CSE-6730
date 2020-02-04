@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import people.*;
+import types.Status;
 
 public class Main {
 
     public static PriorityQueue<Patient> waitingRoom;
     public static ArrayList<Bed> beds;
     private static LinkedBlockingQueue<Event> fel;
+
+    public static int bedsFull = 0;
 
     final static int NUMBER_OF_BEDS = 10;
     final static Range NURSE_RANGE = new Range(20, 40);
@@ -52,11 +55,23 @@ public class Main {
         //1) Are patients being examined ready to leave?
         //2) Are patients undergoing tests ready to be re-examined?
         //3) Are patients who are waiting for lab results ready to be re-examined?
+
+        if (Main.bedsFull < NUMBER_OF_BEDS) {
+            Patient patient = waitingRoom.remove();
+            for (Bed bed: beds) {
+                if (!bed.isFull()) {
+                    bed.addPatient(patient);
+                    bed.setMedicalProfessional(new Nurse());
+                }
+            }
+        }
+
         for (Bed bed: beds) {
             if (bed.isFull()) {
                 bed.getPatient().waitTime += 1;
 
-                int rangeVal = 10000;
+                //Default set for TREATED state so immediate exit upon next iteration
+                int rangeVal = -1;
                 if (bed.getMedicalProfessional() != null) {
                     if (bed.getMedicalProfessional() instanceof Nurse) {
                         rangeVal = NURSE_RANGE.generateRandomInRange();
@@ -68,14 +83,22 @@ public class Main {
                 Patient patient = bed.getPatient();
                 if (patient.waitTime >= rangeVal) {
                     switch(patient.status) {
-                        case WAITING:
-                            break;
                         case NURSE_EVAL:
+                            patient.status = Status.DOCTOR_EVAL;
+                            bed.setMedicalProfessional(new Doctor());
+                            System.out.println("Patient evaluated by nurse");
                             break;
                         case DOCTOR_EVAL:
+                            patient.status = Status.TREATED;
+                            bed.setMedicalProfessional(null);
+                            System.out.println("Patient evaluated by doctor");
                             break;
                         case TREATED:
+                            bed.removePatient();
+                            System.out.println("Patient has been treated");
                             break;
+                        default:
+                            System.out.println("Status is incorrect: " + patient.status.toString());
                     }
                 }
             }

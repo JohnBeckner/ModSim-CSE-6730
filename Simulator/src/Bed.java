@@ -43,6 +43,7 @@ public class Bed {
 
         this.patient = patient;
         this.isFull = true;
+        Main.bedsFull += 1;
         return true;
     }
 
@@ -51,6 +52,7 @@ public class Bed {
         if (this.isFull) {
             this.patient = null;
             this.isFull = false;
+            Main.bedsFull -= 1;
             return true;
         }
 

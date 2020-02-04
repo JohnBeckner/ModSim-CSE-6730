@@ -6,4 +6,6 @@ public class Doctor implements MedicalProfessional {
     public int examine(Patient patient) {
         return 0;
     }
+
+    public Doctor() {};
 }
