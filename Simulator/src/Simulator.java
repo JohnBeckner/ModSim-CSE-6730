@@ -1,7 +1,4 @@
 
-
-
-
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.PriorityQueue;
 import java.util.Comparator;
@@ -27,12 +24,7 @@ public class Simulator {
     private static int prioritySize = priorityValues.length;
     private static final Random randomPriority = new Random();
 
-    static Comparator<Patient> priority = new Comparator<Patient>() {
-        @Override
-        public int compare(Patient p1, Patient p2) {
-            return p1.priority.ordinal() - p2.priority.ordinal();
-        }
-    };
+    static Comparator<Patient> priority = (p1, p2) -> p1.priority.ordinal() - p2.priority.ordinal();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

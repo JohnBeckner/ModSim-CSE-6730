@@ -1,6 +1,5 @@
 
 
-
 public class DoctorExamEvent extends Event {
 
     private Patient patient;
