@@ -38,9 +38,9 @@ public class Simulator {
         Scanner sc = new Scanner(System.in);
         System.out.println("Initial project");
 
-        waitingRoom = new PriorityQueue<>(priority);
+        waitingRoom = new PriorityQueue<Patient>(priority);
         beds = new ArrayList<Bed>();
-        fel = new LinkedBlockingQueue<>();
+        fel = new LinkedBlockingQueue<Event>();
 
         for (int i = 0; i < NUMBER_OF_BEDS; i++) {
             beds.add(new Bed());
