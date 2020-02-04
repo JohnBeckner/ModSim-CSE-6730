@@ -5,9 +5,11 @@ import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import people.*;
 import types.Status;
+import types.Priority;
 
 public class Main {
 
@@ -21,6 +23,10 @@ public class Main {
     final static Range NURSE_RANGE = new Range(20, 40);
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
+    private static Priority[] priorityValues = Priority.values();
+    private static int prioritySize = priorityValues.length;
+    private static final Random randomPriority = new Random();
+
     static Comparator<Patient> priority = new Comparator<Patient>() {
         @Override
         public int compare(Patient p1, Patient p2) {
@@ -29,6 +35,7 @@ public class Main {
     };
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Initial project");
 
         waitingRoom = new PriorityQueue<>(priority);
@@ -45,6 +52,15 @@ public class Main {
             event.execute();
             movePatientsForward();
         }
+
+        System.out.println("Press enter to generate a new patient");
+        String generatePatient = sc.nextLine();
+
+        // generate new patient
+        // make sure to print patient information
+        Patient newPatient = new Patient(priorityValues[randomPriority.nextInt(prioritySize)]);
+        waitingRoom.add(newPatient);
+        System.out.println("Patient Added with priority: " + newPatient.getPriority().toString());
     }
 
     /*

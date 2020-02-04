@@ -9,10 +9,10 @@ public class Patient {
 
     public double waitTime;
 
-    public Patient(Priority p, Status s){
-        waitTime = 0;
-        status = s;
+    public Patient(Priority p){
         priority = p;
+        status = Status.WAITING;
+        waitTime = 0;
     }
 
     public Priority getPriority(){
