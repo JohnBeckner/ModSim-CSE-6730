@@ -10,7 +10,7 @@ public class DoctorExamEvent extends Event {
 
     @Override
     public void execute() {
-
+        
     }
 
     public Patient setPatient(Patient patient) {
