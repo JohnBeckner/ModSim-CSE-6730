@@ -5,22 +5,13 @@ Stochastic Simulation of Emergency Department Wait Times
 
 John Beckner, Julia Corona, and Dylan Reese
 
-
-How to compile and run project on the PACE Cluster:
-
-Login to PACE Cluster: https://docs.pace.gatech.edu/gettingStarted/logon/
-
-Set up git: https://docs.pace.gatech.edu/storage/git/
-Run command: “module load git/2.13.4”
-
-Clone the project repository:
-Run command: “git clone https://github.com/JohnBeckner/ModSim-CSE-6730.git”
+Compile/Run project on pace cluster:
 
 Navigate to src folder:
-Run command: “cd ModSim-CSE-6730/Simulator”
+Run command: “cd Checkpoint/Simulator/src”
 
-Submit job to job scheduler in PACE cluster:
-Run command: “qsub -I -q coc-ice -l nodes=1 -l walltime=00:05:00”
+Load proper java version:
+module load java/1.8.0_25 
 
 Compile project:
 Run command: “javac MedicalProfessional.java Event.java PatientAssessedEvent.java Range.java Priority.java Status.java Patient.java DoctorExamEvent.java Doctor.java Nurse.java Bed.java Simulator.java”
