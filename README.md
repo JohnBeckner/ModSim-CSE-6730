@@ -23,7 +23,7 @@ Submit job to job scheduler in PACE cluster:
 Run command: “qsub -I -q coc-ice -l nodes=1 -l walltime=00:05:00”
 
 Compile project:
-Run command: “javac Main.java”
+Run command: “javac Simulator.java”
 
 Run the project:
-Run command: “java Main”
+Run command: “java Simulator”
