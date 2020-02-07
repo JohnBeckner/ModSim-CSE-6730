@@ -47,6 +47,9 @@ public class Simulator {
         String generatePatient = sc.nextLine();
         try {
             patients = Integer.parseInt(generatePatient);
+            if (patients < 0) {
+                throw new NumberFormatException();
+            }
             System.out.println("Generating " + generatePatient + " patients");
         } catch (NumberFormatException e) {
             System.out.println("Not a valid input.");
@@ -56,7 +59,7 @@ public class Simulator {
         for (int i = 0; i < patients; i ++) {
             Patient newPatient = new Patient(priorityValues[randomPriority.nextInt(prioritySize)]);
             waitingRoom.add(newPatient);
-            System.out.println("Patient Added with priority: " + newPatient.getPriority().toString());
+            System.out.println("Patient" + newPatient.patientNumber + " added with priority: " + newPatient.getPriority().toString());
         }
 
         //Populate initial events somehow
@@ -117,7 +120,7 @@ public class Simulator {
                             break;
                         case DOCTOR_EVAL:
                             bed.removePatient();
-                            System.out.println("Patient evaluated by doctor. Leaving emergency room. " + bed);
+                            System.out.println("Patient " + patient.patientNumber + " with priority " + patient.priority + " has been evaluated by doctor. Leaving emergency room. " + bed);
                             break;
                         default:
                             System.out.println("Status is incorrect: " + patient.status.toString());
