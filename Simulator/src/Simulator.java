@@ -16,7 +16,7 @@ public class Simulator {
     public static int bedsFull = 0;
     public static int time = 0;
 
-    final static int NUMBER_OF_BEDS = 1;
+    final static int NUMBER_OF_BEDS = 10;
     final static Range NURSE_RANGE = new Range(20, 40);
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
@@ -76,8 +76,6 @@ public class Simulator {
             event.setNurse(new Nurse());
             fel.add(event);
             //PatientAssessedEvent
-
-
         }
 
         for (Bed bed: beds) {

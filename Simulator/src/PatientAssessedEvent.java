@@ -13,6 +13,7 @@ public class PatientAssessedEvent extends Event {
                 patient.bed = bed;
                 patient.status = Status.NURSE_EVAL;
                 bed.setMedicalProfessional(new Nurse());
+                break;
             }
         }
     }
