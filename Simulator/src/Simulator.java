@@ -40,12 +40,23 @@ public class Simulator {
 
         // generate new patient
         // make sure to print patient information
-        Patient newPatient = new Patient(priorityValues[randomPriority.nextInt(prioritySize)]);
-        waitingRoom.add(newPatient);
-        System.out.println("Patient Added with priority: " + newPatient.getPriority().toString());
+        int patients = 0;
 
-        System.out.println("Press enter to generate a new patient");
+        System.out.println("Enter the number of paitents to generate");
         String generatePatient = sc.nextLine();
+        try {
+            patients = Integer.parseInt(generatePatient);
+            System.out.println("Generating " + generatePatient + " patients");
+        } catch (NumberFormatException e) {
+            System.out.println("Not a valid input.");
+            System.exit(0);
+        }
+
+        for (int i = 0; i < patients; i ++) {
+            Patient newPatient = new Patient(priorityValues[randomPriority.nextInt(prioritySize)]);
+            waitingRoom.add(newPatient);
+            System.out.println("Patient Added with priority: " + newPatient.getPriority().toString());
+        }
 
         //Populate initial events somehow
         System.out.println("Assume time in minutes:");
@@ -76,6 +87,8 @@ public class Simulator {
             event.setNurse(new Nurse());
             fel.add(event);
             //PatientAssessedEvent
+
+
         }
 
         for (Bed bed: beds) {
