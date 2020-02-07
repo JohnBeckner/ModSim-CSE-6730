@@ -23,6 +23,7 @@ public class Simulator {
     private static Priority[] priorityValues = Priority.values();
     private static int prioritySize = priorityValues.length;
     private static final Random randomPriority = new Random();
+    public static int nextId = 0;
 
     static Comparator<Patient> priority = (p1, p2) -> p1.priority.ordinal() - p2.priority.ordinal();
 

@@ -4,6 +4,7 @@ public class Patient {
     public Priority priority;
     public Status status;
     public Bed bed;
+    public int patientNumber;
 
     public double waitTime;
 
@@ -11,6 +12,8 @@ public class Patient {
         priority = p;
         status = Status.WAITING;
         waitTime = 0;
+        this.patientNumber = Simulator.nextId;
+        Simulator.nextId++;
     }
 
     public Priority getPriority(){
