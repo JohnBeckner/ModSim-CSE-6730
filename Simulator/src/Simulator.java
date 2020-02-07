@@ -65,10 +65,12 @@ public class Simulator {
             System.out.println(Simulator.time);
             if (!fel.isEmpty()) {
                 Event event = fel.remove();
+                System.out.println("Executing event");
                 event.execute();
+            } else {
+                movePatientsForward();
+                Simulator.time += 1;
             }
-            movePatientsForward();
-            Simulator.time += 1;
         }
     }
 
@@ -110,14 +112,12 @@ public class Simulator {
                 if (patient.waitTime >= rangeVal) {
                     switch(patient.status) {
                         case NURSE_EVAL:
-                            DoctorExamEvent event = new DoctorExamEvent();
-                            event.setDoctor(new Doctor());
-                            event.setPatient(patient);
+                            DoctorExamEvent event = new DoctorExamEvent(patient, new Doctor(), bed);
                             fel.add(event);
                             break;
                         case DOCTOR_EVAL:
-                            bed.removePatient();
-                            System.out.println("Patient evaluated by doctor. Leaving emergency room. " + bed);
+                            PatientLeavesEvent leavingEvent = new PatientLeavesEvent(bed, patient);
+                            fel.add(leavingEvent);
                             break;
                         default:
                             System.out.println("Status is incorrect: " + patient.status.toString());
