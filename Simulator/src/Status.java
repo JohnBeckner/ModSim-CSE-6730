@@ -1,8 +1,8 @@
 
-
 public enum Status {
     WAITING,
+    WAITING_FOR_NURSE,
     NURSE_EVAL,
-    DOCTOR_EVAL,
-    TREATED
+    WAITING_FOR_DOCTOR,
+    DOCTOR_EVAL
 }

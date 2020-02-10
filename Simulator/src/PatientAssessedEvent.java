@@ -11,8 +11,8 @@ public class PatientAssessedEvent extends Event {
             if (!bed.isFull()) {
                 bed.addPatient(patient);
                 patient.bed = bed;
-                patient.status = Status.NURSE_EVAL;
-                bed.setMedicalProfessional(new Nurse());
+                patient.status = Status.WAITING_FOR_NURSE;
+                //bed.setMedicalProfessional(this.nurse);
                 break;
             }
         }

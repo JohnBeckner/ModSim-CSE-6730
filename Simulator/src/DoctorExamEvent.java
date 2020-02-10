@@ -9,8 +9,8 @@ public class DoctorExamEvent extends Event {
     @Override
     public void execute() {
         patient.status = Status.DOCTOR_EVAL;
-        bed.setMedicalProfessional(doctor);
-        System.out.println("Patient " + patient.patientNumber + " evaluated by nurse");
+        bed.setMedicalProfessional(this.doctor);
+        System.out.println("Patient " + patient.patientNumber + " assigned a doctor");
     }
 
     public DoctorExamEvent(Patient patient, Doctor doctor, Bed bed) {
