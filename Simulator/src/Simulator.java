@@ -3,7 +3,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -20,9 +19,6 @@ public class Simulator {
     final static Range NURSE_RANGE = new Range(20, 40);
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
-    private static Priority[] priorityValues = Priority.values();
-    private static int prioritySize = priorityValues.length;
-    private static final Random randomPriority = new Random();
     public static int nextId = 0;
 
     static Comparator<Patient> priority = (p1, p2) -> p1.priority.ordinal() - p2.priority.ordinal();
@@ -54,7 +50,11 @@ public class Simulator {
         }
 
         for (int i = 0; i < patients; i ++) {
-            Patient newPatient = new Patient(priorityValues[randomPriority.nextInt(prioritySize)]);
+            Priority newPriority = pickRandomPriority();
+            while(newPriority == null) {
+                newPriority = pickRandomPriority();
+            }
+            Patient newPatient = new Patient(newPriority);
             waitingRoom.add(newPatient);
             System.out.println("Patient Added with priority: " + newPatient.getPriority().toString());
         }
@@ -125,5 +125,17 @@ public class Simulator {
                 }
             }
         }
+    }
+
+    //randomly pick patient priority
+    private static Priority pickRandomPriority() {
+        double rand = Math.random();
+        for (Priority item: Priority.values()) {
+            if (rand <= item.getProb()) {
+                return item;
+            }
+            rand -= item.getProb();
+        }
+        return null;
     }
 }
