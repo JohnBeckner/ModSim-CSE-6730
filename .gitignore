@@ -9,3 +9,26 @@
 .idea/ModSim-CSE-6730.iml
 .idea/ModSim-CSE-6730.iml
 .idea/workspace.xml
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+target/
