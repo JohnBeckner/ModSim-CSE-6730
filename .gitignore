@@ -9,6 +9,7 @@
 .idea/ModSim-CSE-6730.iml
 .idea/ModSim-CSE-6730.iml
 .idea/workspace.xml
+*.class
 
 ### STS ###
 .apt_generated
