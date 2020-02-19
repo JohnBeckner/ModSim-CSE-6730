@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e32522e3-5196-4dc5-892b-a9ac55905827" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/NurseAssignedEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/NurseLeavesEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Simulator/src/NurseAssignedEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Simulator/src/NurseLeavesEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/DoctorExamEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/DoctorExamEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/Patient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/PatientAssessedEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/PatientAssessedEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/PatientLeavesEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/PatientLeavesEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/Priority.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/Priority.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/Simulator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/Simulator$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/Simulator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/out/production/Simulator/Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/out/production/Simulator/Status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/DoctorExamEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/DoctorExamEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/PatientAssessedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/PatientAssessedEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/PatientLeavesEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/PatientLeavesEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/Priority.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/Priority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/Status.java" afterDir="false" />
-    </list>
+    <list default="true" id="e32522e3-5196-4dc5-892b-a9ac55905827" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +17,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Simulator/src/Simulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3066">
+            <state relative-caret-position="-618">
               <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
             </state>
           </provider>
@@ -48,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-15" />
     <option name="width" value="1630" />
     <option name="height" value="1715" />
@@ -129,15 +109,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580497629271</updated>
-      <workItem from="1582130498231" duration="366000" />
+      <workItem from="1582130498231" duration="666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="366000" />
+    <option name="totallyTimeSpent" value="666000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
+    <frame x="-6" y="-6" width="1293" height="693" extended-state="7" />
     <layout>
       <window_info id="Designer" />
       <window_info id="Image Layers" />
@@ -145,17 +125,18 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Capture Tool" />
       <window_info id="Learn" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24939272" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24939272" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="CheckStyle" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32960895" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -188,10 +169,81 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Simulator/src/Simulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3066">
+        <state relative-caret-position="-618">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
