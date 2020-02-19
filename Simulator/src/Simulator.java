@@ -59,6 +59,9 @@ public class Simulator {
         String generatePatient = sc.nextLine();
         try {
             patients = Integer.parseInt(generatePatient);
+            if (patients < 0) {
+                throw new NumberFormatException();
+            }
             System.out.println("Generating " + generatePatient + " patients");
         } catch (NumberFormatException e) {
             System.out.println("Not a valid input.");
@@ -72,7 +75,7 @@ public class Simulator {
             }
             Patient newPatient = new Patient(newPriority);
             waitingRoom.add(newPatient);
-            System.out.println("Patient Added with priority: " + newPatient.getPriority().toString());
+            System.out.println("Patient" + newPatient.patientNumber + " added with priority: " + newPatient.getPriority().toString());
         }
 
         //Populate initial events somehow
