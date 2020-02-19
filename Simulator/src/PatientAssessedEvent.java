@@ -6,13 +6,13 @@ public class PatientAssessedEvent extends Event {
 
     @Override
     public void execute() {
-        System.out.println("Patient being assigned bed");
+        System.out.println("Patient " + patient.patientNumber + " being assigned bed");
         for (Bed bed: Simulator.beds) {
             if (!bed.isFull()) {
                 bed.addPatient(patient);
                 patient.bed = bed;
-                patient.status = Status.NURSE_EVAL;
-                bed.setMedicalProfessional(new Nurse());
+                patient.status = Status.WAITING_FOR_NURSE;
+                //bed.setMedicalProfessional(this.nurse);
                 break;
             }
         }
