@@ -4,12 +4,19 @@ public class DoctorExamEvent extends Event {
 
     private Patient patient;
     private Doctor doctor;
+    private Bed bed;
 
     @Override
     public void execute() {
         patient.status = Status.DOCTOR_EVAL;
-        patient.bed.setMedicalProfessional(doctor);
-        System.out.println("Patient evaluated by nurse");
+        bed.setMedicalProfessional(this.doctor);
+        System.out.println("Patient " + patient.patientNumber + " assigned a doctor");
+    }
+
+    public DoctorExamEvent(Patient patient, Doctor doctor, Bed bed) {
+        this.patient = patient;
+        this.bed = bed;
+        this.doctor = doctor;
     }
 
     public Patient setPatient(Patient patient) {
@@ -20,5 +27,10 @@ public class DoctorExamEvent extends Event {
     public Doctor setDoctor(Doctor doctor) {
         this.doctor = doctor;
         return this.doctor;
+    }
+
+    public Bed setBed(Bed bed) {
+        this.bed = bed;
+        return this.bed;
     }
 }
