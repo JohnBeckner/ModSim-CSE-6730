@@ -39,6 +39,11 @@ public class Patient {
     public int getTimeOut() {
         return timeOut;
     }
+
+    public int getPatientNumber() {
+        return patientNumber;
+    }
+
     public Priority setPriority(Priority p){
         priority = p;
         return priority;
