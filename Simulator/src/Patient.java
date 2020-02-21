@@ -10,7 +10,7 @@ public class Patient {
 
     public Patient(Priority p){
         priority = p;
-        status = Status.WAITING;
+        status = Status.WAITING_FOR_ROOM;
         waitTime = 0;
         this.patientNumber = Simulator.nextId;
         Simulator.nextId++;
