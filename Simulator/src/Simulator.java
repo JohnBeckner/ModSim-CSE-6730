@@ -63,6 +63,7 @@ public class Simulator {
         try {
             patients = Integer.parseInt(generatePatient);
             if (patients < 0) {
+                sc.close();
                 throw new NumberFormatException();
             }
             System.out.println("Generating " + generatePatient + " patients");
@@ -70,6 +71,7 @@ public class Simulator {
             System.out.println("Not a valid input.");
             System.exit(0);
         }
+        sc.close();
 
         for (int i = 0; i < patients; i ++) {
             Priority newPriority = pickRandomPriority();
