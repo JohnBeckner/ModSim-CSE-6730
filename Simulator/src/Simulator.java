@@ -151,6 +151,8 @@ public class Simulator {
                 Patient patient = bed.getPatient();
                 if (patient.waitTime >= rangeVal) {
                     switch(patient.status) {
+                        case WAITING:
+                            patient.setWaitTime(patient.getWaitTime() + 1);
                         case WAITING_FOR_NURSE:
                             if (!nurses.empty()) {
                                 NurseAssignedEvent nurseAssigned = new NurseAssignedEvent(patient, nurses.pop());
