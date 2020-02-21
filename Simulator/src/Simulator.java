@@ -10,6 +10,10 @@ import java.util.Scanner;
 
 public class Simulator {
 
+    private static int triageQueue = 0;
+    private static int timeSinceLastTriagePatient = 1;
+    private static int currentTriageWaitTime = 0;
+
     public static PriorityQueue<Patient> waitingRoom;
     public static ArrayList<Bed> beds;
     private static LinkedBlockingQueue<Event> fel;
@@ -55,7 +59,7 @@ public class Simulator {
         // make sure to print patient information
         int patients = 0;
 
-        System.out.println("Enter the number of paitents to generate");
+        System.out.println("Enter the number of patients to generate");
         String generatePatient = sc.nextLine();
         try {
             patients = Integer.parseInt(generatePatient);
@@ -68,6 +72,9 @@ public class Simulator {
             System.exit(0);
         }
 
+        triageQueue = patients;
+
+        /*
         for (int i = 0; i < patients; i ++) {
             Priority newPriority = pickRandomPriority();
             while(newPriority == null) {
@@ -76,12 +83,25 @@ public class Simulator {
             Patient newPatient = new Patient(newPriority);
             waitingRoom.add(newPatient);
             System.out.println("Patient" + newPatient.patientNumber + " added with priority: " + newPatient.getPriority().toString());
-        }
+        }*/
 
         //Populate initial events somehow
         System.out.println("Assume time in minutes:");
         while (!fel.isEmpty() || !waitingRoom.isEmpty() || time < 250 || bedsFull != 0) {
             System.out.println(Simulator.time);
+
+            if (triageQueue != 0) {
+                if (timeSinceLastTriagePatient > currentTriageWaitTime) {
+                    timeSinceLastTriagePatient = 0;
+                    currentTriageWaitTime = triageWaitTime();
+                    PatientAssessedEvent event = new PatientAssessedEvent();
+                    event.execute();
+                    triageQueue--;
+                } else {
+                    timeSinceLastTriagePatient += 1;
+                }
+            }
+
             if (!fel.isEmpty()) {
                 Event event = fel.remove();
                 System.out.println("Executing event");
@@ -103,14 +123,10 @@ public class Simulator {
         //3) Are patients who are waiting for lab results ready to be re-examined?
 
         if (Simulator.bedsFull < NUMBER_OF_BEDS && !waitingRoom.isEmpty()) {
-           // if (!nurses.empty()) {
-                Patient patient = waitingRoom.remove();
-                PatientAssignedBedEvent event = new PatientAssignedBedEvent();
-                event.setPatient(patient);
-                //event.setNurse(nurses.pop());
-                fel.add(event);
-                //PatientAssessedEvent
-           // }
+            Patient patient = waitingRoom.remove();
+            PatientAssignedBedEvent event = new PatientAssignedBedEvent();
+            event.setPatient(patient);
+            fel.add(event);
         }
 
         for (Bed bed: beds) {
@@ -158,15 +174,12 @@ public class Simulator {
         }
     }
 
-    //randomly pick patient priority
-    private static Priority pickRandomPriority() {
-        double rand = Math.random();
-        for (Priority item: Priority.values()) {
-            if (rand <= item.getProb()) {
-                return item;
-            }
-            rand -= item.getProb();
-        }
-        return null;
+    /*
+     * //TODO -- Needs implementation
+     * Generates a random assessment time for the patient
+     * currently in the triage queue
+     */
+    private static int triageWaitTime() {
+        return 1;
     }
 }
