@@ -108,7 +108,7 @@ public class Simulator {
         if (Simulator.bedsFull < NUMBER_OF_BEDS && !waitingRoom.isEmpty()) {
            // if (!nurses.empty()) {
                 Patient patient = waitingRoom.remove();
-                PatientAssessedEvent event = new PatientAssessedEvent();
+                PatientAssignedBedEvent event = new PatientAssignedBedEvent();
                 event.setPatient(patient);
                 //event.setNurse(nurses.pop());
                 fel.add(event);

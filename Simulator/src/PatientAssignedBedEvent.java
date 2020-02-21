@@ -1,5 +1,5 @@
 
-public class PatientAssessedEvent extends Event {
+public class PatientAssignedBedEvent extends Event {
 
     private Patient patient;
     private Nurse nurse;
