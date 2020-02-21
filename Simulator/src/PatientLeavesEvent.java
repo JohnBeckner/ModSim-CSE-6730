@@ -12,7 +12,7 @@ public class PatientLeavesEvent extends Event {
         bed.setMedicalProfessional(null);
         patient.bed = null;
         Simulator.doctors.push(this.doctor);
-        System.out.println("Patient " + patient.patientNumber + " evaluated by doctor. Leaving emergency room. " + bed);
+        System.out.println("Patient " + patient.patientNumber + " evaluated by doctor. Leaving emergency room. bed ID:" + bed.toString());
     }
 
     public PatientLeavesEvent(Bed bed, Patient patient) {

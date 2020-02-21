@@ -4,6 +4,7 @@ public class Bed {
     public boolean isFull;
     private Patient patient;
     private MedicalProfessional medicalProfessional;
+    private int bedID;
 
     public Bed(Patient patient) {
         this.isFull = false;
@@ -11,6 +12,8 @@ public class Bed {
     }
 
     public Bed() {
+        bedID = Simulator.nextBed;
+        Simulator.nextBed ++;
         this.isFull = false;
     }
 
@@ -54,5 +57,9 @@ public class Bed {
         }
 
         return false;
+    }
+
+    public String toString() {
+        return String.valueOf(bedID);
     }
 }

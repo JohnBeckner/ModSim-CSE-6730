@@ -8,7 +8,7 @@ public class PatientAssessedEvent extends Event {
         }
         Patient patient = new Patient(newPriority);
         Simulator.waitingRoom.add(patient);
-        System.out.println("Patient" + patient.patientNumber + " added with priority: " + patient.getPriority().toString());
+        System.out.println("Patient " + patient.patientNumber + " added with priority: " + patient.getPriority().toString());
     }
 
     //randomly pick patient priority
