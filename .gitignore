@@ -33,4 +33,4 @@ dist/
 nbdist/
 .nb-gradle/
 target/
-
+*.xml
