@@ -26,6 +26,7 @@ public class Simulator {
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
     public static int nextId = 0;
+    public static int nextBed = 0;
 
     static Comparator<Patient> priority = (p1, p2) -> p1.priority.ordinal() - p2.priority.ordinal();
 
@@ -40,7 +41,9 @@ public class Simulator {
         nurses = new Stack<>();
 
         for (int i = 0; i < NUMBER_OF_BEDS; i++) {
-            beds.add(new Bed());
+            Bed newBed = new Bed();
+            beds.add(newBed);
+            System.out.println("Created bed, ID: " + newBed.toString());
         }
 
         for (int i = 0; i < NUMBER_OF_DOCTORS; i++) {
@@ -75,7 +78,7 @@ public class Simulator {
             }
             Patient newPatient = new Patient(newPriority);
             waitingRoom.add(newPatient);
-            System.out.println("Patient" + newPatient.patientNumber + " added with priority: " + newPatient.getPriority().toString());
+            System.out.println("Patient " + newPatient.patientNumber + " added with priority: " + newPatient.getPriority().toString());
         }
 
         //Populate initial events somehow
@@ -105,7 +108,7 @@ public class Simulator {
         if (Simulator.bedsFull < NUMBER_OF_BEDS && !waitingRoom.isEmpty()) {
            // if (!nurses.empty()) {
                 Patient patient = waitingRoom.remove();
-                PatientAssessedEvent event = new PatientAssessedEvent();
+                PatientAssignedBedEvent event = new PatientAssignedBedEvent();
                 event.setPatient(patient);
                 //event.setNurse(nurses.pop());
                 fel.add(event);
