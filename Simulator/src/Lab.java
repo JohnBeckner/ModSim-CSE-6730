@@ -1,8 +1,9 @@
-public class Lab extends Room {
+public class Lab {
     private static int id;
+    private int capacity;
 
     public Lab() {
         id += 1;
-        //capacity = ?;
+        capacity = 1;
     }
 }

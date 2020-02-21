@@ -1,9 +1,10 @@
-public class Xray extends Room{
+public class Xray{
     private static int id;
+    private int capacity;
 
     public Xray() {
         id += 1;
-        //capacity = ?;
+        capacity = 1;
     }
 
 }
