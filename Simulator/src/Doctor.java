@@ -18,7 +18,7 @@ public class Doctor implements MedicalProfessional {
     }
 
     public boolean canTakePatients() {
-        if (patients.size() >= Simulator.MAX_NURSE_PATIENTS) {
+        if (patients.size() >= Simulator.MAX_DOCTOR_PATIENTS) {
             return false;
         } else {
             return true;
@@ -27,7 +27,7 @@ public class Doctor implements MedicalProfessional {
 
     public Patient addPatient(Patient patient) {
 
-        if (patients.size() >= Simulator.MAX_NURSE_PATIENTS) {
+        if (patients.size() >= Simulator.MAX_DOCTOR_PATIENTS) {
             return null;
         } else {
             patients.add(patient);
