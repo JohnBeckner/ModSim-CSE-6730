@@ -11,6 +11,7 @@ public class DoctorExamEvent extends Event {
         patient.status = Status.DOCTOR_EVAL;
         bed.setMedicalProfessional(this.doctor);
         System.out.println("Patient " + patient.patientNumber + " assigned a doctor");
+        this.doctor.addPatient(patient);
     }
 
     public DoctorExamEvent(Patient patient, Doctor doctor, Bed bed) {

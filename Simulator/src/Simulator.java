@@ -17,11 +17,14 @@ public class Simulator {
     public static PriorityQueue<Patient> waitingRoom;
     public static ArrayList<Bed> beds;
     private static LinkedBlockingQueue<Event> fel;
-    public static Stack<Doctor> doctors;
-    public static Stack<Nurse> nurses;
+    public static ArrayList<Doctor> doctors;
+    public static ArrayList<Nurse> nurses;
 
     public static int bedsFull = 0;
     public static int time = 0;
+
+    public static final int MAX_NURSE_PATIENTS = 5;
+    public static final int MAX_DOCTOR_PATIENTS = 10;
 
     final static int NUMBER_OF_BEDS = 10;
     final static int NUMBER_OF_NURSES = 5;
@@ -41,8 +44,8 @@ public class Simulator {
         waitingRoom = new PriorityQueue<Patient>(Simulator.priority);
         beds = new ArrayList<Bed>();
         fel = new LinkedBlockingQueue<Event>();
-        doctors = new Stack<>();
-        nurses = new Stack<>();
+        doctors = new ArrayList<Doctor>();
+        nurses = new ArrayList<Nurse>();
 
         for (int i = 0; i < NUMBER_OF_BEDS; i++) {
             Bed newBed = new Bed();
@@ -51,11 +54,11 @@ public class Simulator {
         }
 
         for (int i = 0; i < NUMBER_OF_DOCTORS; i++) {
-            doctors.push(new Doctor());
+            doctors.add(new Doctor());
         }
 
         for (int i = 0; i < NUMBER_OF_NURSES; i++) {
-            nurses.push(new Nurse());
+            nurses.add(new Nurse());
         }
 
         // generate new patient
@@ -67,6 +70,7 @@ public class Simulator {
         try {
             patients = Integer.parseInt(generatePatient);
             if (patients < 0) {
+                sc.close();
                 throw new NumberFormatException();
             }
             System.out.println("Generating " + generatePatient + " patients");
@@ -74,6 +78,7 @@ public class Simulator {
             System.out.println("Not a valid input.");
             System.exit(0);
         }
+        sc.close();
 
         triageQueue = patients;
 
@@ -149,10 +154,19 @@ public class Simulator {
                 Patient patient = bed.getPatient();
                 if (patient.waitTime >= rangeVal) {
                     switch(patient.status) {
+                        //case WAITING:
+                        //    patient.setWaitTime(patient.getWaitTime() + 1);
                         case WAITING_FOR_NURSE:
-                            if (!nurses.empty()) {
-                                NurseAssignedEvent nurseAssigned = new NurseAssignedEvent(patient, nurses.pop());
-                                fel.add(nurseAssigned);
+                            if (!nurses.isEmpty()) {
+                                // as soon as there is a nurse that can take patients assign
+                                // this patient to the nurse, else keep patient in wating state.
+                                for (Nurse n : nurses) {
+                                    if (n.canTakePatients()) {
+                                        NurseAssignedEvent nurseAssigned = new NurseAssignedEvent(patient, n);
+                                        fel.add(nurseAssigned);
+                                        System.out.println("Nurse assigned: " + n + " patients: " + n.getNumPatients() + "/" + MAX_DOCTOR_PATIENTS);
+                                    }
+                                }
                             }
                             break;
                         case NURSE_EVAL:
@@ -160,9 +174,14 @@ public class Simulator {
                             fel.add(nurseLeaving);
                             break;
                         case WAITING_FOR_DOCTOR:
-                            if (!doctors.empty()) {
-                                DoctorExamEvent event = new DoctorExamEvent(patient, doctors.pop(), bed);
-                                fel.add(event);
+                            if (!doctors.isEmpty()) {
+                                for (Doctor d : doctors) {
+                                    if (d.canTakePatients()) {
+                                        DoctorExamEvent event = new DoctorExamEvent(patient, d, bed);
+                                        fel.add(event);
+                                        System.out.println("Doc assigned: " + d + " patients: " + d.getNumPatients() + "/" + MAX_DOCTOR_PATIENTS);
+                                    }
+                                }
                             }
                             break;
                         case DOCTOR_EVAL:

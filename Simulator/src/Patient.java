@@ -5,6 +5,8 @@ public class Patient {
     public Status status;
     public Bed bed;
     public int patientNumber;
+    public int timeIn;
+    public int timeOut;
 
     public double waitTime;
 
@@ -12,6 +14,8 @@ public class Patient {
         priority = p;
         status = Status.WAITING_FOR_ROOM;
         waitTime = 0;
+        timeIn = Simulator.time;
+        timeOut = -1;
         this.patientNumber = Simulator.nextId;
         Simulator.nextId++;
     }
@@ -28,6 +32,18 @@ public class Patient {
         return waitTime;
     }
 
+    public int getTimeIn() {
+        return timeIn;
+    }
+
+    public int getTimeOut() {
+        return timeOut;
+    }
+
+    public int getPatientNumber() {
+        return patientNumber;
+    }
+
     public Priority setPriority(Priority p){
         priority = p;
         return priority;
@@ -41,5 +57,9 @@ public class Patient {
     public double setWaitTime(double t) {
         waitTime = t;
         return waitTime;
+    }
+
+    public void setTimeOut(int time) {
+        timeOut = time;
     }
 }
