@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Nurse implements MedicalProfessional {
 
-    public Patient[] patients;
+    public ArrayList<Patient> patients;
 
     @Override
     public int examine(Patient patient) {
@@ -10,35 +11,39 @@ public class Nurse implements MedicalProfessional {
     }
 
     public Nurse() {
-        patients = new Patient[Simulator.MAX_NURSE_PATIENTS];
+        patients = new ArrayList<Patient>();
     }
 
-    public Patient[] getPatients() {
-        return patients;
+    public int getNumPatients() {
+        return patients.size();
+    }
+
+    public boolean canTakePatients() {
+        if (patients.size() >= Simulator.MAX_NURSE_PATIENTS) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public Patient addPatient(Patient patient) {
 
-        if (patients.length >= Simulator.MAX_NURSE_PATIENTS) {
-            //cannot add new patient
+        if (patients.size() >= Simulator.MAX_NURSE_PATIENTS) {
+            return null;
         } else {
-            // add new patient
+            patients.add(patient);
         }
 
-        return patients[patients.length - 1];
+        return patients.get(patients.size() - 1);
     }
 
     public Patient removePatient(Patient patient) {
         Patient removedPatient = null;
 
-        for (int i = 0; i < patients.length; i++) {
-            if (patients[i].getPatientNumber() == patient.getPatientNumber()) {
-                //remove Patient
+        for (int i = 0; i < patients.size(); i++) {
+            if (patients.get(i).getPatientNumber() == patient.getPatientNumber()) {
+                patients.remove(patients.get(i));
             } 
-
-            if (removedPatient != null) {
-                //shift patients over by one
-            }
         }
         return removedPatient;
     }

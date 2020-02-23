@@ -8,6 +8,7 @@ public class NurseAssignedEvent extends Event {
         this.patient.bed.setMedicalProfessional(this.nurse);
         this.patient.status = Status.NURSE_EVAL;
         System.out.println("Nurse assigned to patient " + patient.patientNumber);
+        this.nurse.addPatient(patient);
     }
 
     public NurseAssignedEvent(Patient patient, Nurse nurse) {
