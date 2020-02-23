@@ -13,12 +13,14 @@ public class Simulator {
     private static int triageQueue = 0;
     private static int timeSinceLastTriagePatient = 1;
     private static int currentTriageWaitTime = 0;
+    private static int interarrivalTime = 0;
 
     public static PriorityQueue<Patient> waitingRoom;
     public static ArrayList<Bed> beds;
     private static LinkedBlockingQueue<Event> fel;
     public static ArrayList<Doctor> doctors;
     public static ArrayList<Nurse> nurses;
+    public static ArrayList<Integer> arrivals;
 
     public static int bedsFull = 0;
     public static int time = 0;
@@ -29,6 +31,7 @@ public class Simulator {
     final static int NUMBER_OF_BEDS = 10;
     final static int NUMBER_OF_NURSES = 5;
     final static int NUMBER_OF_DOCTORS = 4;
+    final static Range PATIENT_ARRIVAL_RANGE = new Range(0, 46);
     final static Range NURSE_RANGE = new Range(20, 40);
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
@@ -46,6 +49,7 @@ public class Simulator {
         fel = new LinkedBlockingQueue<Event>();
         doctors = new ArrayList<Doctor>();
         nurses = new ArrayList<Nurse>();
+        arrivals = new ArrayList<Integer>();
 
         for (int i = 0; i < NUMBER_OF_BEDS; i++) {
             Bed newBed = new Bed();
@@ -81,6 +85,10 @@ public class Simulator {
         sc.close();
 
         triageQueue = patients;
+        for (int i = 0; i < patients; i++) {
+            arrivals.add(PATIENT_ARRIVAL_RANGE.generateRandomInRange());
+        }
+        arrivals.add(0, 0);
 
         /*
         for (int i = 0; i < patients; i ++) {
