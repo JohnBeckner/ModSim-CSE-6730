@@ -164,7 +164,8 @@ public class Simulator {
                                     if (n.canTakePatients()) {
                                         NurseAssignedEvent nurseAssigned = new NurseAssignedEvent(patient, n);
                                         fel.add(nurseAssigned);
-                                        System.out.println("Nurse assigned: " + n + " patients: " + n.getNumPatients() + "/" + MAX_DOCTOR_PATIENTS);
+                                        System.out.println("Nurse assigned: " + n + " patients: " + n.getNumPatients() + "/" + MAX_NURSE_PATIENTS);
+                                        break;
                                     }
                                 }
                             }
@@ -180,6 +181,7 @@ public class Simulator {
                                         DoctorExamEvent event = new DoctorExamEvent(patient, d, bed);
                                         fel.add(event);
                                         System.out.println("Doc assigned: " + d + " patients: " + d.getNumPatients() + "/" + MAX_DOCTOR_PATIENTS);
+                                        break;
                                     }
                                 }
                             }

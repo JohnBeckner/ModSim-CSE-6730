@@ -6,10 +6,10 @@ public class NurseLeavesEvent extends Event {
 
     @Override
     public void execute() {
-        Simulator.nurses.push(this.nurse);
         this.bed.setMedicalProfessional(null);
         this.patient.status = Status.WAITING_FOR_DOCTOR;
         System.out.println("Nurse checkup complete for patient " + patient.patientNumber);
+        nurse.removePatient(patient);
     }
 
     public NurseLeavesEvent(Patient patient) {
