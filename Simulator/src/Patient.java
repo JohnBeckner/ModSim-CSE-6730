@@ -7,6 +7,7 @@ public class Patient {
     public int patientNumber;
     public int timeIn;
     public int timeOut;
+    public double waitRoomTime;
 
     public double waitTime;
 
@@ -14,6 +15,7 @@ public class Patient {
         priority = p;
         status = Status.WAITING_FOR_ROOM;
         waitTime = 0;
+        waitRoomTime = 0;
         timeIn = Simulator.time;
         timeOut = -1;
         this.patientNumber = Simulator.nextId;
@@ -66,7 +68,7 @@ public class Patient {
     public String toString() {
         return "" + patientNumber + "," 
         + priority + ","
-        + waitTime + ","
+        + waitRoomTime + ","
         + timeIn + ","
         + timeOut;
     }

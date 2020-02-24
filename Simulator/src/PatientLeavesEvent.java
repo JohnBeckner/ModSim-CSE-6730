@@ -14,7 +14,7 @@ public class PatientLeavesEvent extends Event {
         doctor.removePatient(patient);
         System.out.println("Patient " + patient.patientNumber + " evaluated by doctor. Leaving emergency room. bed ID:" + bed.toString());
         System.out.println("Total time: " + (patient.getTimeOut() - patient.getTimeIn()));
-        System.out.println("wait time: " + ((patient.getTimeOut() - patient.getTimeIn()) - patient.getWaitTime()));
+        System.out.println("wait time: " + patient.waitRoomTime);
     }
 
     public PatientLeavesEvent(Bed bed, Patient patient) {
