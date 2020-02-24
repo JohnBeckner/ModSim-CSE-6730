@@ -68,7 +68,7 @@ public class Simulator {
         // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE,
         // #re-runs]
 
-        int[][] initSettings = { { 10, 10, 10, 10, 10, 10, 10 } };
+        int[][] initSettings = { { 30, 10, 10, 10, 10, 10, 10 } };
 
         for (int i = 0; i < initSettings.length; i++) {
             int patients = initSettings[i][0];
@@ -121,7 +121,7 @@ public class Simulator {
             for (int i = 0; i < NUMBER_OF_BEDS; i++) {
                 Bed newBed = new Bed();
                 beds.add(newBed);
-                System.out.println("Created bed, ID: " + newBed.toString());
+                //System.out.println("Created bed, ID: " + newBed.toString());
             }
 
             for (int i = 0; i < NUMBER_OF_DOCTORS; i++) {
@@ -140,7 +140,7 @@ public class Simulator {
 
             System.out.println("Assume time in minutes:");
             while (!fel.isEmpty() || !waitingRoom.isEmpty() || time < 250 || bedsFull != 0) {
-                System.out.println(Simulator.time);
+                //System.out.println(Simulator.time);
 
                 if (interarrivalTime == arrivals.get(index)) {
                     if (triageQueue != 0) {
@@ -156,14 +156,19 @@ public class Simulator {
 
                 if (!fel.isEmpty()) {
                     Event event = fel.remove();
-                    System.out.println("Executing event");
+                    //System.out.println("Executing event");
                     event.execute();
                 } else {
                     movePatientsForward();
                     Simulator.time += 1;
                 }
             }
-            System.out.println(patientOutput);
+            //System.out.println(patientOutput);
+            for (int i = 0; i < patientOutput.size(); i++) {
+                System.out.println(patientOutput.get(i));
+            }
+
+            System.out.println("\n");
         }
 
         try {
@@ -216,7 +221,7 @@ public class Simulator {
                                     if (n.canTakePatients()) {
                                         NurseAssignedEvent nurseAssigned = new NurseAssignedEvent(patient, n);
                                         fel.add(nurseAssigned);
-                                        System.out.println("Nurse assigned: " + n + " patients: " + n.getNumPatients() + "/" + MAX_NURSE_PATIENTS);
+                                        //System.out.println("Nurse assigned: " + n + " patients: " + n.getNumPatients() + "/" + MAX_NURSE_PATIENTS);
                                         break;
                                     }
                                 }
@@ -232,7 +237,7 @@ public class Simulator {
                                     if (d.canTakePatients()) {
                                         DoctorExamEvent event = new DoctorExamEvent(patient, d, bed);
                                         fel.add(event);
-                                        System.out.println("Doc assigned: " + d + " patients: " + d.getNumPatients() + "/" + MAX_DOCTOR_PATIENTS);
+                                        //System.out.println("Doc assigned: " + d + " patients: " + d.getNumPatients() + "/" + MAX_DOCTOR_PATIENTS);
                                         break;
                                     }
                                 }

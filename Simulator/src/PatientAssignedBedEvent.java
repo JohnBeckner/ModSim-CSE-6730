@@ -6,7 +6,7 @@ public class PatientAssignedBedEvent extends Event {
 
     @Override
     public void execute() {
-        System.out.println("Patient " + patient.patientNumber + " being assigned bed");
+        //System.out.println("Patient " + patient.patientNumber + " being assigned bed");
         for (Bed bed: Simulator.beds) {
             if (!bed.isFull()) {
                 bed.addPatient(patient);

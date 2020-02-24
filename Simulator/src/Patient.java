@@ -64,10 +64,10 @@ public class Patient {
     }
 
     public String toString() {
-        return "" + patientNumber + "," 
-        + priority + ","
-        + waitTime + ","
-        + timeIn + ","
+        return "" + patientNumber + ", "
+        + priority + ", "
+        + waitTime + ", "
+        + timeIn + ", "
         + timeOut;
     }
 }

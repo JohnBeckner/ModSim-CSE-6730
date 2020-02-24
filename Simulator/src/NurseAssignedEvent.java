@@ -7,7 +7,7 @@ public class NurseAssignedEvent extends Event {
     public void execute() {
         this.patient.bed.setMedicalProfessional(this.nurse);
         this.patient.status = Status.NURSE_EVAL;
-        System.out.println("Nurse assigned to patient " + patient.patientNumber);
+        //System.out.println("Nurse assigned to patient " + patient.patientNumber);
         this.nurse.addPatient(patient);
     }
 
