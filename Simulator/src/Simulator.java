@@ -73,9 +73,7 @@ public class Simulator {
 
         // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE, #re-runs]
 
-        int[][] initSettings = { { 140, 40, 12, 18, 10, 10, 10 },
-                                 {  1, 10, 10, 10, 10, 10, 10 }
-                                };
+        int[][] initSettings = { {140, 40, 12, 18, 10, 10, 10} };
 
         for (int i = 0; i < initSettings.length; i++) {
             runID = i;
