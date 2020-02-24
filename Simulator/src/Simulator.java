@@ -93,9 +93,23 @@ public class Simulator {
         NUMBER_OF_BEDS = numBeds;
         MAX_DOCTOR_PATIENTS = maxDoc;
         MAX_NURSE_PATIENTS = maxNurse;
+
+        /*
+
+        public static ArrayList<String> patientOutput;
+
+        */
         
         for (int r = 0; r < reRuns; r++) {
             patientOutput = new ArrayList<String>();
+
+            triageQueue = 0;
+            interarrivalTime = 0;
+            bedsFull = 0;
+            time = 0;
+            nextId = 0;
+            nextBed = 0;
+            index = 0;
 
             waitingRoom = new PriorityQueue<Patient>(Simulator.priority);
             beds = new ArrayList<Bed>();
