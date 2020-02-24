@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e32522e3-5196-4dc5-892b-a9ac55905827" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Simulator/src/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/Patient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/PatientLeavesEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/PatientLeavesEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator/src/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator/src/Simulator.java" afterDir="false" />
-    </list>
+    <list default="true" id="e32522e3-5196-4dc5-892b-a9ac55905827" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,12 +189,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580497629271</updated>
-      <workItem from="1582130498231" duration="29513000" />
+      <workItem from="1582130498231" duration="29925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29513000" />
+    <option name="totallyTimeSpent" value="29925000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
