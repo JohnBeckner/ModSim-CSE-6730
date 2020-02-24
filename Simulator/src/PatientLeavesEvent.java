@@ -11,7 +11,6 @@ public class PatientLeavesEvent extends Event {
         bed.removePatient();
         bed.setMedicalProfessional(null);
         patient.bed = null;
-        patient.setTimeOut(Simulator.time);
         doctor.removePatient(patient);
         System.out.println("Patient " + patient.patientNumber + " evaluated by doctor. Leaving emergency room. bed ID:" + bed.toString());
         System.out.println("Total time: " + (patient.getTimeOut() - patient.getTimeIn()));
