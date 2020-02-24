@@ -1,6 +1,9 @@
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -40,6 +43,9 @@ public class Simulator {
     public static int nextBed = 0;
     public static int index = 0;
 
+    public static int runID = 0;
+    static ArrayList<String> output = new ArrayList<>();
+
     static Comparator<Patient> priority = (p1, p2) -> p1.priority.ordinal() - p2.priority.ordinal();
 
     public static void main(String[] args) {
@@ -65,13 +71,14 @@ public class Simulator {
         // }
         // sc.close();
 
-        // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE,
-        // #re-runs]
+        // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE, #re-runs]
 
-        int[][] initSettings = { { 20, 10, 10, 10, 10, 10, 10 } };
-
+        int[][] initSettings = { { 20, 10, 10, 10, 10, 10, 10 },
+                                 {  1, 10, 10, 10, 10, 10, 10 }
+                                };
 
         for (int i = 0; i < initSettings.length; i++) {
+            runID = i;
             int patients = initSettings[i][0];
             int docs = initSettings[i][1];
             int numNurses = initSettings[i][2];
@@ -82,9 +89,31 @@ public class Simulator {
 
             runSimulation(patients, docs, numNurses, numBeds, maxDoc, maxNurse, reRuns);
         }
+
+        try {
+            File out = new File ("output.csv");
+            FileOutputStream fos = new FileOutputStream(out);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+            String header = "run id, # Patients, # Doctors, #  Nurses, #Beds, max doctor patients, max nurse patients";
+            bw.write(header);
+            bw.newLine();
+
+            for (int i = 0; i < output.size(); i++) {
+                bw.write(output.get(i));
+                bw.newLine();
+            }
+
+            bw.close();
+            fos.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public static void runSimulation(int numPatients, int numDocs, int numNurse, int numBeds, int maxDoc, int maxNurse,
+    public static ArrayList<String> runSimulation(int numPatients, int numDocs, int numNurse, int numBeds, int maxDoc, int maxNurse,
             int reRuns) {
         System.out.println("Initial project");
 
@@ -94,12 +123,6 @@ public class Simulator {
         NUMBER_OF_BEDS = numBeds;
         MAX_DOCTOR_PATIENTS = maxDoc;
         MAX_NURSE_PATIENTS = maxNurse;
-
-        /*
-
-        public static ArrayList<String> patientOutput;
-
-        */
         
         for (int r = 0; r < reRuns; r++) {
             patientOutput = new ArrayList<String>();
@@ -164,6 +187,11 @@ public class Simulator {
                     Simulator.time += 1;
                 }
             }
+            for (String s : patientOutput) {
+                s = runID + "_" + r + "," + s;
+                output.add(s);
+            }
+
             //System.out.println(patientOutput);
             for (int i = 0; i < patientOutput.size(); i++) {
                 System.out.println(patientOutput.get(i));
@@ -171,12 +199,7 @@ public class Simulator {
 
             System.out.println("\n");
         }
-
-        try {
-            //write patientOutput to csv.
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return patientOutput;
     }
 
     /*
@@ -198,22 +221,22 @@ public class Simulator {
 
         for (Bed bed: beds) {
             if (bed.isFull()) {
-                bed.getPatient().waitTime += 1;
+                // bed.getPatient().waitTime += 1;
 
                 //Default set for TREATED state so immediate exit upon next iteration
                 int rangeVal = -1;
-                if (bed.getMedicalProfessional() != null) {
-                    if (bed.getMedicalProfessional() instanceof Nurse) {
-                        rangeVal = NURSE_RANGE.generateRandomInRange();
-                    } else {
-                        rangeVal = DOCTOR_RANGE.generateRandomInRange();
-                    }
-                }
+                // if (bed.getMedicalProfessional() != null) {
+                //     if (bed.getMedicalProfessional() instanceof Nurse) {
+                //         rangeVal = NURSE_RANGE.generateRandomInRange();
+                //     } else {
+                //         rangeVal = DOCTOR_RANGE.generateRandomInRange();
+                //     }
+                // }
 
                 Patient patient = bed.getPatient();
                 if (patient.waitTime >= rangeVal) {
                     switch(patient.status) {
-                        //case WAITING:
+                        // case WAITING_FOR_ASSESSMENT:
                         //    patient.setWaitTime(patient.getWaitTime() + 1);
                         case WAITING_FOR_NURSE:
                             if (!nurses.isEmpty()) {
