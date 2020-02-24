@@ -70,6 +70,7 @@ public class Patient {
         + priority + ","
         + waitRoomTime + ","
         + timeIn + ","
-        + timeOut;
+        + timeOut + "," 
+        + Simulator.waitingRoom.size();
     }
 }
