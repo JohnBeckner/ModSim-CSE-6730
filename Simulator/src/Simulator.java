@@ -37,6 +37,7 @@ public class Simulator {
 
     public static int nextId = 0;
     public static int nextBed = 0;
+    public static int index = 0;
 
     static Comparator<Patient> priority = (p1, p2) -> p1.priority.ordinal() - p2.priority.ordinal();
 
@@ -106,16 +107,28 @@ public class Simulator {
         while (!fel.isEmpty() || !waitingRoom.isEmpty() || time < 250 || bedsFull != 0) {
             System.out.println(Simulator.time);
 
-            if (triageQueue != 0) {
-                if (timeSinceLastTriagePatient > currentTriageWaitTime) {
-                    timeSinceLastTriagePatient = 0;
-                    currentTriageWaitTime = triageWaitTime();
+//            if (triageQueue != 0) {
+//                if (timeSinceLastTriagePatient > currentTriageWaitTime) {
+//                    timeSinceLastTriagePatient = 0;
+//                    currentTriageWaitTime = triageWaitTime();
+//                    PatientAssessedEvent event = new PatientAssessedEvent();
+//                    event.execute();
+//                    triageQueue--;
+//                } else {
+//                    timeSinceLastTriagePatient += 1;
+//                }
+//            }
+            if (interarrivalTime == arrivals.get(index)) {
+                if (triageQueue != 0) {
+                    interarrivalTime = 0;
+                    //currentTriageWaitTime = triageWaitTime();
                     PatientAssessedEvent event = new PatientAssessedEvent();
                     event.execute();
+                    index++;
                     triageQueue--;
-                } else {
-                    timeSinceLastTriagePatient += 1;
                 }
+            } else {
+                    interarrivalTime += 1;
             }
 
             if (!fel.isEmpty()) {
@@ -167,7 +180,7 @@ public class Simulator {
                         case WAITING_FOR_NURSE:
                             if (!nurses.isEmpty()) {
                                 // as soon as there is a nurse that can take patients assign
-                                // this patient to the nurse, else keep patient in wating state.
+                                // this patient to the nurse, else keep patient in waiting state.
                                 for (Nurse n : nurses) {
                                     if (n.canTakePatients()) {
                                         NurseAssignedEvent nurseAssigned = new NurseAssignedEvent(patient, n);
@@ -211,7 +224,7 @@ public class Simulator {
      * Generates a random assessment time for the patient
      * currently in the triage queue
      */
-    private static int triageWaitTime() {
-        return 1;
-    }
+//    private static int triageWaitTime() {
+//        return 1;
+//    }
 }
