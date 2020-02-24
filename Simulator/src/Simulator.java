@@ -121,7 +121,6 @@ public class Simulator {
             if (interarrivalTime == arrivals.get(index)) {
                 if (triageQueue != 0) {
                     interarrivalTime = 0;
-                    //currentTriageWaitTime = triageWaitTime();
                     PatientAssessedEvent event = new PatientAssessedEvent();
                     event.execute();
                     index++;
