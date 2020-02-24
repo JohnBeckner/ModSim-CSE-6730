@@ -8,7 +8,7 @@ public class NurseLeavesEvent extends Event {
     public void execute() {
         this.bed.setMedicalProfessional(null);
         this.patient.status = Status.WAITING_FOR_DOCTOR;
-        System.out.println("Nurse checkup complete for patient " + patient.patientNumber);
+        //System.out.println("Nurse checkup complete for patient " + patient.patientNumber);
         nurse.removePatient(patient);
     }
 
