@@ -13,8 +13,6 @@ import java.util.Scanner;
 public class Simulator {
 
     private static int triageQueue = 0;
-    private static int timeSinceLastTriagePatient = 1;
-    private static int currentTriageWaitTime = 0;
     private static int interarrivalTime = 0;
 
     public static PriorityQueue<Patient> waitingRoom;
@@ -133,14 +131,13 @@ public class Simulator {
                 if (interarrivalTime == arrivals.get(index)) {
                     if (triageQueue != 0) {
                         interarrivalTime = 0;
-                        //currentTriageWaitTime = triageWaitTime();
                         PatientAssessedEvent event = new PatientAssessedEvent();
                         event.execute();
                         index++;
                         triageQueue--;
                     }
                 } else {
-                        interarrivalTime += 1;
+                    interarrivalTime += 1;
                 }
 
                 if (!fel.isEmpty()) {
@@ -246,7 +243,5 @@ public class Simulator {
      * Generates a random assessment time for the patient
      * currently in the triage queue
      */
-//    private static int triageWaitTime() {
-//        return 1;
-//    }
+
 }
