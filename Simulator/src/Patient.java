@@ -62,4 +62,12 @@ public class Patient {
     public void setTimeOut(int time) {
         timeOut = time;
     }
+
+    public String toString() {
+        return "" + patientNumber + "," 
+        + priority + ","
+        + waitTime + ","
+        + timeIn + ","
+        + timeOut;
+    }
 }
