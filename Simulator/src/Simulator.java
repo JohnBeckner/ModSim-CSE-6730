@@ -35,7 +35,7 @@ public class Simulator {
     static int NUMBER_OF_BEDS = 10;
     static int NUMBER_OF_NURSES = 5;
     static int NUMBER_OF_DOCTORS = 4;
-    final static Range PATIENT_ARRIVAL_RANGE = new Range(0, 46);
+    final static Range PATIENT_ARRIVAL_RANGE = new Range(0, 9);
     final static Range NURSE_RANGE = new Range(20, 40);
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
@@ -73,7 +73,7 @@ public class Simulator {
 
         // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE, #re-runs]
 
-        int[][] initSettings = { { 20, 10, 10, 10, 10, 10, 10 },
+        int[][] initSettings = { { 140, 40, 12, 18, 10, 10, 10 },
                                  {  1, 10, 10, 10, 10, 10, 10 }
                                 };
 
@@ -95,7 +95,7 @@ public class Simulator {
             FileOutputStream fos = new FileOutputStream(out);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
-            String header = "run id, # Patients, # Doctors, #  Nurses, #Beds, max doctor patients, max nurse patients";
+            String header = "run id, Patient ID, Patient Priority, Wait Time, Time In, Time out, patients waiting";
             bw.write(header);
             bw.newLine();
 
@@ -188,7 +188,7 @@ public class Simulator {
                 }
             }
             for (String s : patientOutput) {
-                s = runID + "_" + r + "," + s;
+                s = runID + "_" + r + "_" + numBeds + "," + s;
                 output.add(s);
             }
 
@@ -226,17 +226,17 @@ public class Simulator {
 
         for (Bed bed: beds) {
             if (bed.isFull()) {
-                // bed.getPatient().waitTime += 1;
+                bed.getPatient().waitTime += 1;
 
                 //Default set for TREATED state so immediate exit upon next iteration
                 int rangeVal = -1;
-                // if (bed.getMedicalProfessional() != null) {
-                //     if (bed.getMedicalProfessional() instanceof Nurse) {
-                //         rangeVal = NURSE_RANGE.generateRandomInRange();
-                //     } else {
-                //         rangeVal = DOCTOR_RANGE.generateRandomInRange();
-                //     }
-                // }
+                if (bed.getMedicalProfessional() != null) {
+                    if (bed.getMedicalProfessional() instanceof Nurse) {
+                        rangeVal = NURSE_RANGE.generateRandomInRange();
+                    } else {
+                        rangeVal = DOCTOR_RANGE.generateRandomInRange();
+                    }
+                }
 
                 Patient patient = bed.getPatient();
                 if (patient.waitTime >= rangeVal) {
