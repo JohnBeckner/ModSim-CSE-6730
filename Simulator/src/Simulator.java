@@ -221,17 +221,17 @@ public class Simulator {
 
         for (Bed bed: beds) {
             if (bed.isFull()) {
-                // bed.getPatient().waitTime += 1;
+                bed.getPatient().waitTime += 1;
 
                 //Default set for TREATED state so immediate exit upon next iteration
                 int rangeVal = -1;
-                // if (bed.getMedicalProfessional() != null) {
-                //     if (bed.getMedicalProfessional() instanceof Nurse) {
-                //         rangeVal = NURSE_RANGE.generateRandomInRange();
-                //     } else {
-                //         rangeVal = DOCTOR_RANGE.generateRandomInRange();
-                //     }
-                // }
+                if (bed.getMedicalProfessional() != null) {
+                    if (bed.getMedicalProfessional() instanceof Nurse) {
+                        rangeVal = NURSE_RANGE.generateRandomInRange();
+                    } else {
+                        rangeVal = DOCTOR_RANGE.generateRandomInRange();
+                    }
+                }
 
                 Patient patient = bed.getPatient();
                 if (patient.waitTime >= rangeVal) {
