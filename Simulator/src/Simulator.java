@@ -68,7 +68,7 @@ public class Simulator {
         // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE,
         // #re-runs]
 
-        int[][] initSettings = { { 10, 10, 10, 10, 10, 10, 10 } };
+        int[][] initSettings = { { 20, 10, 10, 10, 10, 10, 10 } };
 
         for (int i = 0; i < initSettings.length; i++) {
             int patients = initSettings[i][0];
@@ -170,6 +170,7 @@ public class Simulator {
 
         if (Simulator.bedsFull < NUMBER_OF_BEDS && !waitingRoom.isEmpty()) {
             Patient patient = waitingRoom.remove();
+            patient.waitRoomTime = (Simulator.time - patient.timeIn);
             PatientAssignedBedEvent event = new PatientAssignedBedEvent();
             event.setPatient(patient);
             fel.add(event);
