@@ -8,7 +8,7 @@ John Beckner, Julia Corona, and Dylan Reese
 Compile/Run project on pace cluster:
 
 Navigate to src folder:
-Run command: “cd Checkpoint/Simulator/src”
+Run command: “cd Simulator/src”
 
 Load proper java version:
 module load java/1.8.0_25 
