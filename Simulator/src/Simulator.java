@@ -44,34 +44,14 @@ public class Simulator {
     public static int index = 0;
 
     public static int runID = 0;
+    public static int trials = 0;
     static ArrayList<String> output = new ArrayList<>();
 
     static Comparator<Patient> priority = (p1, p2) -> p1.priority.ordinal() - p2.priority.ordinal();
 
     public static void main(String[] args) {
 
-        // Scanner sc = new Scanner(System.in);
-
-        // generate new patient
-        // make sure to print patient information
-        // int patients = 0;
-
-        // System.out.println("Enter the number of patients to generate");
-        // String generatePatient = sc.nextLine();
-        // try {
-        // patients = Integer.parseInt(generatePatient);
-        // if (patients < 0) {
-        // sc.close();
-        // throw new NumberFormatException();
-        // }
-        // System.out.println("Generating " + generatePatient + " patients");
-        // } catch (NumberFormatException e) {
-        // System.out.println("Not a valid input.");
-        // System.exit(0);
-        // }
-        // sc.close();
-
-        // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE, #re-runs]
+        // init Settings = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE, #re-runs]
 
         int[][] initSettings = { {160, 12, 18, 5, 10, 5, 10},
                                  {160, 12, 18, 10, 10, 5, 10},
@@ -115,12 +95,14 @@ public class Simulator {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("Total trials: " + (trials));
+        System.out.println("Please refer to the generated output.csv for output data");
 
     }
 
     public static ArrayList<String> runSimulation(int numPatients, int numDocs, int numNurse, int numBeds, int maxDoc, int maxNurse,
             int reRuns) {
-        System.out.println("Initial project");
+        System.out.println("Initalize project:");
 
         int patients = numPatients;
         NUMBER_OF_DOCTORS = numDocs;
@@ -130,6 +112,9 @@ public class Simulator {
         MAX_NURSE_PATIENTS = maxNurse;
         
         for (int r = 0; r < reRuns; r++) {
+            System.out.println("Running Simulation: ");
+            System.out.println("Run: " + r + " Number of patients: " + patients + " Number of beds: " + numBeds);
+            trials ++;
             patientOutput = new ArrayList<String>();
 
             triageQueue = 0;
@@ -150,7 +135,6 @@ public class Simulator {
             for (int i = 0; i < NUMBER_OF_BEDS; i++) {
                 Bed newBed = new Bed();
                 beds.add(newBed);
-                //System.out.println("Created bed, ID: " + newBed.toString());
             }
 
             for (int i = 0; i < NUMBER_OF_DOCTORS; i++) {
@@ -167,9 +151,7 @@ public class Simulator {
             }
             arrivals.add(0, 0);
 
-            System.out.println("Assume time in minutes:");
             while (!fel.isEmpty() || !waitingRoom.isEmpty() || time < 250 || bedsFull != 0) {
-                //System.out.println(Simulator.time);
 
                 if (interarrivalTime == arrivals.get(index)) {
                     if (triageQueue != 0) {
@@ -185,7 +167,6 @@ public class Simulator {
 
                 if (!fel.isEmpty()) {
                     Event event = fel.remove();
-                    //System.out.println("Executing event");
                     event.execute();
                 } else {
                     movePatientsForward();
@@ -197,13 +178,7 @@ public class Simulator {
                 output.add(s);
             }
             output.add("");
-
-            //System.out.println(patientOutput);
-            // for (int i = 0; i < patientOutput.size(); i++) {
-            //     System.out.println(patientOutput.get(i));
-            // }
-
-            // System.out.println("\n");
+            System.out.println("Run " + r + " complete");
         }
         return patientOutput;
     }
@@ -247,17 +222,12 @@ public class Simulator {
                 Patient patient = bed.getPatient();
                 if (patient.waitTime >= rangeVal) {
                     switch(patient.status) {
-                        // case WAITING_FOR_ASSESSMENT:
-                        //    patient.setWaitTime(patient.getWaitTime() + 1);
                         case WAITING_FOR_NURSE:
                             if (!nurses.isEmpty()) {
-                                // as soon as there is a nurse that can take patients assign
-                                // this patient to the nurse, else keep patient in waiting state.
                                 for (Nurse n : nurses) {
                                     if (n.canTakePatients()) {
                                         NurseAssignedEvent nurseAssigned = new NurseAssignedEvent(patient, n);
                                         fel.add(nurseAssigned);
-                                        //System.out.println("Nurse assigned: " + n + " patients: " + n.getNumPatients() + "/" + MAX_NURSE_PATIENTS);
                                         break;
                                     }
                                 }
@@ -273,7 +243,6 @@ public class Simulator {
                                     if (d.canTakePatients()) {
                                         DoctorExamEvent event = new DoctorExamEvent(patient, d, bed);
                                         fel.add(event);
-                                        //System.out.println("Doc assigned: " + d + " patients: " + d.getNumPatients() + "/" + MAX_DOCTOR_PATIENTS);
                                         break;
                                     }
                                 }
@@ -292,11 +261,4 @@ public class Simulator {
             }
         }
     }
-
-    /*
-     * //TODO -- Needs implementation
-     * Generates a random assessment time for the patient
-     * currently in the triage queue
-     */
-
 }
