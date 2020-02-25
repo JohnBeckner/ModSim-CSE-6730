@@ -68,7 +68,7 @@ public class Patient {
     public String toString() {
         return "" + patientNumber + "," 
         + priority + ","
-        + " Wait time: " + waitRoomTime + ","
+        + waitRoomTime + ","
         + timeIn + ","
         + timeOut + "," 
         + Simulator.waitingRoom.size();

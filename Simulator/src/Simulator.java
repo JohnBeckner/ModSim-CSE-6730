@@ -35,7 +35,7 @@ public class Simulator {
     static int NUMBER_OF_BEDS = 10;
     static int NUMBER_OF_NURSES = 5;
     static int NUMBER_OF_DOCTORS = 4;
-    final static Range PATIENT_ARRIVAL_RANGE = new Range(0, 9);
+    final static Range PATIENT_ARRIVAL_RANGE = new Range(0, 14);
     final static Range NURSE_RANGE = new Range(20, 40);
     final static Range DOCTOR_RANGE = new Range(180, 240);
 
@@ -73,7 +73,14 @@ public class Simulator {
 
         // init array = [#Patients, #Doctors, #Nurses, #Beds, #MAX_Doc, #MAX_NURSE, #re-runs]
 
-        int[][] initSettings = { {140, 40, 12, 18, 10, 10, 10} };
+        int[][] initSettings = { {160, 12, 18, 5, 10, 5, 10},
+                                 {160, 12, 18, 10, 10, 5, 10},
+                                 {160, 12, 18, 15, 10, 5, 10},
+                                 {160, 12, 18, 20, 10, 5, 10},
+                                 {160, 12, 18, 25, 10, 5, 10},
+                                 {160, 12, 18, 30, 10, 5, 10},
+                                 {160, 12, 18, 35, 10, 5, 10},
+                                 {160, 12, 18, 45, 10, 5, 10}};
 
         for (int i = 0; i < initSettings.length; i++) {
             runID = i;
