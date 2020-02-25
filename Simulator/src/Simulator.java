@@ -2,15 +2,12 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.OutputStreamWriter;
-import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Simulator {

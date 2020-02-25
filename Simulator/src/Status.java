@@ -1,6 +1,5 @@
 
 public enum Status {
-    WAITING_FOR_ASSESSMENT,
     WAITING_FOR_ROOM,
     WAITING_FOR_NURSE,
     NURSE_EVAL,

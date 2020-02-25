@@ -13,7 +13,6 @@ public class PatientAssignedBedEvent extends Event {
                 patient.bed = bed;
                 patient.status = Status.WAITING_FOR_NURSE;
                 patient.setWaitTime(Simulator.time - patient.getTimeIn());
-                //bed.setMedicalProfessional(this.nurse);
                 break;
             }
         }
