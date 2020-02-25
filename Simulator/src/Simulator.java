@@ -196,13 +196,14 @@ public class Simulator {
                 s = runID + "_" + r + "_" + numBeds + "," + s;
                 output.add(s);
             }
+            output.add("");
 
             //System.out.println(patientOutput);
-            for (int i = 0; i < patientOutput.size(); i++) {
-                System.out.println(patientOutput.get(i));
-            }
+            // for (int i = 0; i < patientOutput.size(); i++) {
+            //     System.out.println(patientOutput.get(i));
+            // }
 
-            System.out.println("\n");
+            // System.out.println("\n");
         }
         return patientOutput;
     }
