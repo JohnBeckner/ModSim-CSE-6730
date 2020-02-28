@@ -35,3 +35,4 @@ nbdist/
 .nb-gradle/
 target/
 *.xml
+.idea/workspace.xml
